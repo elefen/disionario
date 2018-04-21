@@ -1,0 +1,1679 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Disionario de Elefen</title>
+<style>
+* { margin: 0; padding: 0; }
+body { background-color: #DDD; color: #000; font-family: "Segoe UI", Verdana, Helvetica, sans-serif; font-size: 95%; line-height: 1.4em; }
+a:link { color: #00F; text-decoration: none; }
+a:visited { color: #909; }
+a:hover { background-color: #CCC; }
+#naviga { background-color: #EEF; border-bottom: 1px solid #AAA; height: 4.5em; padding: 0.5em 1em 0.2em 1em; }
+#datas { float: right; }
+#botones { float: right; }
+.sc { font-variant: small-caps; }
+#xef { background-color: #FFF; border: 1px solid #AAA; border-radius: 1em; margin: -2em 2em 2em 2em; padding: 1em; }
+.formulario { background-color: #EEF; border: 1px solid #AAA; border-radius: 0.7em; line-height: 1.7em; margin-bottom: 1.2em; padding: 0.6em 0.6em 0.4em 0.8em; }
+#form { display: none; }
+#elejesSimple { display: block; }
+#elejes { display: none; }
+#aida { display: none; }
+label { white-space: nowrap; }
+label.elejeda { font-weight: bold; }
+h1 { font-size: 160%; font-weight: normal; margin: 0.2em 0 0.8em 0; padding-bottom: 0.3em; }
+h2 { font-size: 120%; font-weight: normal; margin: 2em 0 1em 0; padding-bottom: 0.1em; }
+dl { margin-bottom: 0.8em; }
+dt { color: #333; font-weight: bold; }
+dd { margin-left: 2em; }
+code { font-family: Consolas, "Courier New", Courier, monospace; }
+#aida code { border: 1px solid #CCC; color: #222; font-weight: bold; }
+#trovadas { display: none; }
+#trovadas { margin: 0 0 0.8em 0; }
+#trovadas p { margin-bottom: 0; padding-left: 2em; text-indent: -2em; }
+#trovadas p.radis { border-top: 1px solid #AAA; clear: right; margin-top: 1.2em; }
+#trovadas .lfn { font-weight: bold; }
+#trovadas p.derivada .lfn { color: #555; }
+#trovadas .categoria { color: #444; font-style: italic; }
+#trovadas .pronunsia { color: #444; }
+#trovadas .simbol { color: #444; }
+#trovadas .simbol .sim { font-weight: bold; }
+#trovadas .sinifia { color: #555; font-weight: bold; }
+#trovadas .defini { color: #006; }
+#trovadas .tasonomia { color: #006; font-style: italic; }
+#trovadas .nota { color: #444; }
+#trovadas .usa { color: #444; }
+#trovadas .lingua { color: #666; font-variant: small-caps; }
+#trovadas .tradui { color: #050; }
+#trovadas .brasetida { color: #777; font-size: 90%; }
+#trovadas .am-br { color: #777; padding: 0 0.1em; }
+p { margin-bottom: 0.8em; }
+#elejesSimple p { margin-bottom: 0.2em; }
+#elejes p { border-top: 1px solid #AAA; margin: 0.4em 0 0.4em; padding-top: 0.4em; }
+#categorias-g { display: none; }
+#categorias-s { display: none; }
+#jscon { display: none; }
+#spelador { display: none; }
+#spele { width: 100%; height: 15em; }
+.imaje { border: 1px solid #FFF; cursor: pointer; float: right; }
+.imaje-grande { border: 3px solid #FFF; }
+
+@media only screen and (min-resolution:96dpi) and (max-resolution:264dpi) and (min-width:768px) and (max-width:1024px),
+       only screen and (-webkit-min-device-pixel-ratio: 1) and (-webkit-max-device-pixel-ratio:2) and (min-width:768px) and (max-width:1024px)
+
+@media only screen and (min-resolution: 120dpi) and (-webkit-min-device-pixel-ratio: 1.25) and (min-width: 768px) and (max-width: 1024px) {
+  body { background-color: #FFF; font-family: sans-serif; font-size: 120%; margin: 0.5em; }
+  #naviga { display: none; }
+  #titulo { display: none; }
+  #xef { border: none; border-radius: 0; margin: 0; padding: 0; }
+  #terma { font-size: 120%; }
+  #bXerca { font-size: 120%; }
+  #botones { float: none; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="naviga">
+<a href="http://purl.org/net/lfn/disionario/">Disionario</a> &#x2013;
+<a href="http://lfn.wikia.com/wiki/Gramatica_de_lfn">Gramatica</a> &#x2013;
+<a href="http://lfn.wikia.com/">Vici</a>
+<span id="datas"><a href="index.html">27 janero 2018 <span class="sc">html</span></a> &nbsp;+&nbsp;
+<a href="disionario.js"><span id="dataDeDatos">(cargante…)</span> <span class="sc">js</span></a></span>
+</div>
+
+<div id="xef">
+<h1 id="titulo">Disionario de Elefen</h1>
+
+<div id="cargante" class="formulario">
+<p>Cargante la banco de datos…</p>
+<noscript><p>La disionario usa JavaScript per funsiona, ma JavaScript no es disponable en tua surfador.</p></noscript>
+</div>
+
+<div id="form" class="formulario">
+<p id="botones">
+<input type="button" id="bElejes" value="Elejes..." onclick="Alterna('elejes', 'bElejes')"> &nbsp;
+<input type="button" id="bSpelador" value="Spelador..." onclick="Alterna('spelador', 'bSpelador')"> &nbsp;
+<input type="button" id="bAida" value="Aida..." onclick="Alterna('aida', 'bAida')">
+</p>
+<p>
+<input type="text" id="terma" size="40" accesskey="f"> &nbsp;
+<input type="button" id="bXerca" value="Xerca" onclick="Xerca()">
+</p>
+
+<div id="elejesSimple">
+<p>Lingua: &nbsp;
+<select id="linguaSimple">
+<option value="tota">tota</option>
+<option value="lfn" selected>elefen</option>
+<option value="en">engles</option>
+<option value="ca">catalan</option>
+<option value="da">dansce</option>
+<option value="de">deutx</option>
+<option value="el">elinica</option>
+<option value="es">espaniol</option>
+<option value="eo">esperanto</option>
+<option value="fr">franses</option>
+<option value="it">italian</option>
+<option value="he">ivri</option>
+<option value="ja">japanes</option>
+<option value="nl">nederlandes</option>
+<option value="pl">polsce</option>
+<option value="pt">portuges</option>
+<option value="ru">rusce</option>
+</select> &nbsp; &nbsp;
+<label><input type="checkbox" id="cInt" onclick="Rexerca('cInt')"> Trova parolas intera</label> &nbsp; &nbsp;
+<label><input type="checkbox" id="cEsa" onclick="Rexerca('cEsa')"> Trova esata</label> &nbsp; &nbsp;
+<label><input type="checkbox" id="cIma" onclick="Rexerca()"> Mostra imajes</label>
+</p>
+
+<p>Capitoles: &nbsp;
+<code><a href="javascript:Capitol('a')">A</a>
+<a href="javascript:Capitol('b')">B</a>
+<a href="javascript:Capitol('c')">C</a>
+<a href="javascript:Capitol('d')">D</a>
+<a href="javascript:Capitol('e')">E</a>
+<a href="javascript:Capitol('f')">F</a>
+<a href="javascript:Capitol('g')">G</a>
+<a href="javascript:Capitol('h')">H</a>
+<a href="javascript:Capitol('i')">I</a>
+<a href="javascript:Capitol('j')">J</a>
+<a href="javascript:Capitol('k')">K</a>
+<a href="javascript:Capitol('l')">L</a>
+<a href="javascript:Capitol('m')">M</a>
+<a href="javascript:Capitol('n')">N</a>
+<a href="javascript:Capitol('o')">O</a>
+<a href="javascript:Capitol('p')">P</a>
+<a href="javascript:Capitol('q')">Q</a>
+<a href="javascript:Capitol('r')">R</a>
+<a href="javascript:Capitol('s')">S</a>
+<a href="javascript:Capitol('t')">T</a>
+<a href="javascript:Capitol('u')">U</a>
+<a href="javascript:Capitol('v')">V</a>
+<a href="javascript:Capitol('w')">W</a>
+<a href="javascript:Capitol('x')">X</a>
+<a href="javascript:Capitol('y')">Y</a>
+<a href="javascript:Capitol('z')">Z</a></code> &nbsp;
+<a href="javascript:Capitol('')">Tota</a>
+</p>
+</div>
+
+<div id="elejes">
+<p>Trova: &nbsp;
+<label id="e-pInt"><input type="radio" id="pInt" name="p" onclick="Refresci()"> parolas intera</label> &nbsp;
+<label id="e-pCom"><input type="radio" id="pCom" name="p" onclick="Refresci()"> comensas de parolas</label> &nbsp;
+<label id="e-pFin"><input type="radio" id="pFin" name="p" onclick="Refresci()"> finis de parolas</label> &nbsp;
+<label id="e-eInt"><input type="radio" id="eInt" name="p" onclick="Refresci()"> espresas intera</label> &nbsp;
+<label id="e-eCom"><input type="radio" id="eCom" name="p" onclick="Refresci()"> comensas de espresas</label> &nbsp;
+<label id="e-eFin"><input type="radio" id="eFin" name="p" onclick="Refresci()"> finis de espresas</label> &nbsp;
+<label id="e-pTot"><input type="radio" id="pTot" name="p" onclick="Refresci()"> tota</label><br>
+</p>
+
+<p>Xerca en: &nbsp;
+<label id="e-lfn"><input type="checkbox" id="lfn" onclick="Refresci()"> elefen</label> &nbsp;
+<label id="e-def"><input type="checkbox" id="def" onclick="Refresci()"> definis</label> &nbsp;
+<label id="e-ca"><input type="checkbox" id="ca" onclick="Refresci()"> catalan</label> &nbsp;
+<label id="e-da"><input type="checkbox" id="da" onclick="Refresci()"> dansce</label> &nbsp;
+<label id="e-de"><input type="checkbox" id="de" onclick="Refresci()"> deutx</label> &nbsp;
+<label id="e-el"><input type="checkbox" id="el" onclick="Refresci()"> elinica</label> &nbsp;
+<label id="e-en"><input type="checkbox" id="en" onclick="Refresci()"> engles</label> &nbsp;
+<label id="e-es"><input type="checkbox" id="es" onclick="Refresci()"> espaniol</label> &nbsp;
+<label id="e-eo"><input type="checkbox" id="eo" onclick="Refresci()"> esperanto</label> &nbsp;
+<label id="e-fr"><input type="checkbox" id="fr" onclick="Refresci()"> franses</label> &nbsp;
+<label id="e-it"><input type="checkbox" id="it" onclick="Refresci()"> italian</label> &nbsp;
+<label id="e-he"><input type="checkbox" id="he" onclick="Refresci()"> ivri</label> &nbsp;
+<label id="e-ja"><input type="checkbox" id="ja" onclick="Refresci()"> japanes</label> &nbsp;
+<label id="e-nl"><input type="checkbox" id="nl" onclick="Refresci()"> nederlandes</label> &nbsp;
+<label id="e-pl"><input type="checkbox" id="pl" onclick="Refresci()"> polsce</label> &nbsp;
+<label id="e-pt"><input type="checkbox" id="pt" onclick="Refresci()"> portuges</label> &nbsp;
+<label id="e-ru"><input type="checkbox" id="ru" onclick="Refresci()"> rusce</label> &nbsp;
+<input type="button" value="Zero" onclick="XercaEnTota(false)">&nbsp;
+<input type="button" value="Tota" onclick="XercaEnTota(true)">&nbsp; &nbsp; &nbsp;
+<label id="e-iRad"><input type="checkbox" id="iRad" onclick="Refresci()"> radises</label> &nbsp;
+<label id="e-iDer"><input type="checkbox" id="iDer" onclick="Refresci()"> derivadas</label> &nbsp;
+<label id="e-iBra"><input type="checkbox" id="iBra" onclick="Refresci()"> testo brasetida</label><br>
+</p>
+
+<p>
+<label id="e-fCag"><input type="checkbox" id="fCag" onclick="Refresci()"> Filtri par categoria gramatical &hellip;</label><span id="categorias-g"></span>
+</p>
+
+<p>
+<label id="e-fCat"><input type="checkbox" id="fCat" onclick="Refresci()"> Filtri par categoria de sinifia &hellip;</label><span id="categorias-s"></span><br>
+</p>
+
+<p>Mostra: &nbsp;
+<label id="e-mCa"><input type="checkbox" id="mCa" onclick="Refresci()"> catalan</label> &nbsp;
+<label id="e-mDa"><input type="checkbox" id="mDa" onclick="Refresci()"> dansce</label> &nbsp;
+<label id="e-mDe"><input type="checkbox" id="mDe" onclick="Refresci()"> deutx</label> &nbsp;
+<label id="e-mEl"><input type="checkbox" id="mEl" onclick="Refresci()"> elinica</label> &nbsp;
+<label id="e-mEn"><input type="checkbox" id="mEn" onclick="Refresci()"> engles</label> &nbsp;
+<label id="e-mEs"><input type="checkbox" id="mEs" onclick="Refresci()"> espaniol</label> &nbsp;
+<label id="e-mEo"><input type="checkbox" id="mEo" onclick="Refresci()"> esperanto</label> &nbsp;
+<label id="e-mFr"><input type="checkbox" id="mFr" onclick="Refresci()"> franses</label> &nbsp;
+<label id="e-mIt"><input type="checkbox" id="mIt" onclick="Refresci()"> italian</label> &nbsp;
+<label id="e-mHe"><input type="checkbox" id="mHe" onclick="Refresci()"> ivri</label> &nbsp;
+<label id="e-mJa"><input type="checkbox" id="mJa" onclick="Refresci()"> japanes</label> &nbsp;
+<label id="e-mNl"><input type="checkbox" id="mNl" onclick="Refresci()"> nederlandes</label> &nbsp;
+<label id="e-mPl"><input type="checkbox" id="mPl" onclick="Refresci()"> polsce</label> &nbsp;
+<label id="e-mPt"><input type="checkbox" id="mPt" onclick="Refresci()"> portuges</label> &nbsp;
+<label id="e-mRu"><input type="checkbox" id="mRu" onclick="Refresci()"> rusce</label> &nbsp;
+<input type="button" value="Zero" onclick="MostraTota(false)">&nbsp;
+<input type="button" value="Tota" onclick="MostraTota(true)"> &nbsp; &nbsp; &nbsp;
+<label id="e-mCat"><input type="checkbox" id="mCat" onclick="Refresci()"> categorias</label> &nbsp;
+<label id="e-mDef"><input type="checkbox" id="mDef" onclick="Refresci()"> definis</label> &nbsp;
+<label id="e-ima"><input type="checkbox" id="ima" onclick="Refresci()"> imajes</label> &nbsp;
+<label id="e-mArt"><input type="checkbox" id="mArt" onclick="Refresci()"> articles completa</label> &nbsp;
+<label id="e-pri"><input type="checkbox" id="pri" onclick="Refresci()"> conveninte per primi</label>
+</p>
+
+<p>
+<label id="e-maj"><input type="checkbox" id="maj" onclick="Refresci()"> Distingui leteras major</label> &nbsp;
+<label id="e-sin"><input type="checkbox" id="sin" onclick="Refresci()"> Distingui spasios, sinietas, e ifenes</label> &nbsp;
+<label id="e-rex"><input type="checkbox" id="rex" onclick="Refresci()"> Xerca un regex</label> &nbsp;
+<label id="e-jsr"><input type="checkbox" id="jsr" onclick="Refresci()"> Restrinje plu con tua codigo propre</label>
+<input type="text" id="jsRes" size="100">
+</p>
+
+<p>
+<input type="button" id="bXerca2" value="Xerca" onclick="Xerca()"> &nbsp;
+<input type="button" id="bReinisia" value="Reinisia" onclick="Reinisia()"> &nbsp;
+<a id="lia" href="index.html">Conserva esta elejes</a> &nbsp;
+<a href="disionario.txt">Testo cru (engles)</a> &nbsp;
+<a href="disionario_completa.txt">Testo cru (tota)</a> &nbsp;
+<a href="radises.txt">Radises</a>
+</p>
+</div>
+
+<div id="spelador">
+<textarea id="spele"></textarea>
+<input type="button" value="Trova malspeles" onclick="Spelador()">
+<input type="button" value="Trova definis malspeleda" onclick="SpeladorDeDefinis()"> &nbsp;
+<label id="e-sMaj"><input type="checkbox" id="sMaj"> Iniora parolas cual comensa con letera major</label>
+</div>
+</div>
+
+<div id="trovadas"></div>
+
+<div id="aida">
+<h2>Aida</h2>
+
+<p>Per xerca, tape un <code>terma</code> (un parola o espresa de elefen o engles), partal o completa, en la caxa a la comensa de la paje, e clica alora la boton <i>Xerca</i>.
+Tu pote eleje la lingua de la terma, e en cual parte de un parola tu vole trova lo. Alternativa, tu pote clica un de la leteras en la linia <i>Capitoles</i> per vide tota
+articles en acel parte de la disionario, o clica <i>Tota</i> per vide la disionario intera. Si tu eleje <i>Conveninte per primi</i>, la capitoles apare en un forma plu compata.</p>
+
+<p>Si tu vole spesifa plu esata la tu xerca, clica la boton <i>Plu</i> per revela estas:</p>
+
+<dl>
+<dt>Trova parolas intera <dd>Aseta un article sola si lo conteni la terma como un parola esata (o segue de parolas). <code>de</code> no trova "desende".
+<dt>Trova comensas de parolas <dd>Aseta un article sola si lo conteni un parola cual comensa con la terma.
+<dt>Trova finis de parolas <dd>Aseta un article sola si lo conteni un parola cual fini con la terma.
+<dt>Trova espresas intera <dd>Aseta un article sola si lo conteni un campo (vide <i>Xerca en…</i> a su) cual es esata la terma. <code>propre</code> no trova "lingua propre".
+<dt>Trova comensas de espresas <dd>Aseta un article sola si lo conteni un campo cual comensa con la terma.
+<dt>Trova finis de espresas <dd>Aseta un article sola si lo conteni un campo cual fini con la terma.
+<dt>Trova tota <dd>Aseta un article si lo conteni la terma. Esta es la posible la min restrinjente en esta grupo.
+<dt>Distingui leteras major <dd>No regarda leteras minor e major, per esemplo <code>t</code> e <code>T</code>, como intercambiable. <code>site</code> no trova "Site de Vatican".
+<dt>Distingui spasios, sinietas, e ifenes <dd>No regarda esta sinias como iniorable. <code>de sinia</code> no trova "desinia", e <code>cliche</code> no trova "cliché".
+<dt>Xerca en… <dd>Considera sola la campos cual tu eleje asi. Tu pote eleje <i>elefen</i> (la parolas xef de la articles), la <i>definis</i> de la articles, e la linguas variosa en cual traduis es disponable.
+<dt>Radises <dd>Considera la campos de radises.
+<dt>Derivadas <dd>Considera la campos de derivadas.
+<dt>Testo brasetida <dd>Considera la partes de campos cual es scriveda entre brasetas ronda. Estas conteni claris e notas min importante ca la resta de un campo.
+<dt>Filtri par categoria <dd>(Cuando tu eleje esta, tu revela du series de categorias. La serie prima conteni la clases sintatical, como nomes, verbos, etc. La serie du conteni familias comun de sinifias.)
+Aseta un article sola si lo parteni a la categorias cual tu eleje.
+<dt>Mostra… <dd>Inclui sola la detalias elejeda en la lista de articles trovada. Tu pote eleje la <i>categorias</i>, la <i>definis</i>, e la linguas variosa en cual traduis es disponable.
+<dt>Articles completa <dd>Cuando un derivada es trovada, inclui ance la detalias de sua radis e de tota otra derivadas de la radis. Si tu deseleje esta, la resultas es plu compata.
+<dt>Conveninte per primi <dd>Mostra la resultas en un forma simple e compata, sin colores, e sin la aparatetas de la xercador.
+<dt>Xerca un regex <dd>Per espertas! Trata la terma como un regex, tal ce alga sinias ave sinifias spesial. Per esemplo, <code>^[A-Z]</code> trova tota nomes propre, e
+<code>^c[lr][^ ]*(s|en?)$</code> trova tota parolas individua (sin spasios) cual comensa con "cl" o "cr", e cual fini con o "s" o "e" o "en". Per plu informas sur regexes, vide
+<a href="http://www.regular-expressions.info/quickstart.html">esta bon introdui</a> o consulta <a href="http://en.wikipedia.org/wiki/Regular_expression">Vicipedia</a>.
+<dt>Restrinje plu con tua codigo propre <dd>Per espertas! Aplica tua filtro propre, espresada como un espresa de JavaScript de cual sua valua es vera o falsa. Cada article es presentada
+a la espresa como la variable <code>$</code>, e si la espresa es vera, la article es asetada. Per esemplo, <code>$.pronunsia</code> trova tota articles cual spesifa un pronunsia, e
+<code>$.L === $.en || $.defini.length &gt; 100</code> trova tota per cual la tradui engles es la mesma como la parola en elefen <i>o</i> cual ave un defini plu longa ca sento sinias.
+Per detalias de la strutur de la ojeto <code>$</code>, consulta la comentas en la codigo de esta paje, e spesial la funsion <i>InisiaDisionario</i>.
+<dt>Reinisia <dd>Restora cada eleje a sua state orijinal.
+</dl>
+
+<p>On ave ance un util simple per trova eras de spele. Clica la boton <i>Spelador</i> per revela lo. Tape la testo cual tu vole esamina en la caxa grande, e alora clica la boton
+<i>Trova malspeles</i>. La spelador comprende la regulas la plu importante sur la infletas de parolas en elefen, tal ce lo reconose plurales de nomes, partisipios de verbos, e
+ajetivos e verbos con la prefisa "non-". La spelador pote comprende la strutur de testos paralel, si los es presentada como tables de MediaWiki, con la testo elefen en la colona prima,
+como comun trovada en la <a href="http://lfn.wikia.com/wiki/Antolojia">vici de elefen</a>. Tu pote usa la spelador per trova eras de spele en la definis, par clica la boton
+<i>Trova definis malspeleda</i>. Tu pote eleje iniora parolas cual comensa con un letera major: multe de estas es nomes propre cual no apare en la disionario, ma los pote es ance parolas comun a la comensa de un frase o simil.</p>
+
+<p>La lia <i>Conserva tua elejes</i> representa la elejes cual es ativa a esta momento. Pos ajusta la xercador a tua preferes, tu pote ajunta acel lia a la lista de pajes favoreda
+en tua surfador. La lia conteni sola la elejes avansada: no la terma mesma, e no la elejes simple de la lingua e la parte de parola. Par la lia <i>Testo cru</i>, tu pote descarga
+la testo intera de la disionario en la forma "cru" en cual nos edita lo en la <a href="http://lfn.wikia.com/wiki/Vici_de_LFN:Disionario">vici de elefen</a>. Par la lia <i>Radises</i>, tu pote reseta un lista simple de radises.</p>
+
+<p>Tu pote descarga la xercador a tua computador e usa lo an cuando tu no es enlinia. Per fa acel, descarga la xercador (<a href="index.html">index.html</a>) e
+sua banco de datos (<a href="disionario.js">disionario.js</a>), e pone los a la mesma loca en la sistem de fixes en tua computador. La lias destra a la comensa de la paje
+indica la data de la du fixes. Per fa xercas, abri "index.html".</p>
+</div>
+
+</body>
+
+<script src="disionario.js"></script>
+
+<script>
+"use strict";
+
+// Variables global.
+var me = {
+  listaDeCategorias: [],
+  tableDeCategorias: {},
+  listaDeElejes:     [],
+  listaDeLinguas:    ['ca', 'da', 'de', 'el', 'en', 'eo', 'es', 'fr', 'it', 'he', 'ja', 'nl', 'pl', 'pt', 'ru'],
+  lista2DeLinguas:   ['Ca', 'Da', 'De', 'El', 'En', 'Eo', 'Es', 'Fr', 'It', 'He', 'Ja', 'Nl', 'Pl', 'Pt', 'Ru'],
+  tableDeSinietas:   {},
+  regexDeSinietas:   '',
+  controlador:       null,
+  nomes:             {},
+  verbos:            {},
+  ajetivos:          {},
+  otras:             {},
+  inisiada:          false,
+  numeroDeImaje:     0
+};
+
+//-----------------------------------------------------------------------------
+
+function Spelador() {
+  if (! me.inisiada) InisiaDisionario();
+  MostraMalspeles(TrovaMalspeles(TestoMalspeleda().split(/[^A-Za-z]/)));
+}
+
+function SpeladorDeDefinis(parolas) {
+  if (! me.inisiada) InisiaDisionario();
+  var tota = [];
+  for (var n = 0; n < disionario.length; n++) {
+    var article = disionario[n];
+    var malspeles = TrovaMalspeles(article.defini.split(/[^A-Za-z]/));
+    for (var i = 0; i < malspeles.length; i++) {
+      malspeles[i] = '<b>' + article.lfn + ':</b> &nbsp; ' + malspeles[i];
+    }
+    if (malspeles.length > 0) {
+      tota = tota.concat(malspeles);
+    }
+  }
+  MostraMalspeles(tota);
+}
+
+function TestoMalspeleda() {
+  var tota = Elemento('spele').value.split('\n');
+
+  // Suporta testos paralel si on presenta los en la sintatica de tables de MediaWiki,
+  // como comun usada en la vici de elefen. Iniora la colona destra, cual no conteni elefen.
+  // Cada duple de colonas comensa con un linia cual conteni sola la du sinias "|-".
+  if (tota.indexOf('|-') > -1) {
+    var linias = [];
+    var colona = 0;
+    for (var i = 0; i < tota.length; i++) {
+      var linia = tota[i];
+      if (colona === 2) {
+        // Permete linias vacua entre la du colonas.
+        if (linia.search(/\S/) > -1) {
+          colona = 0;
+        }
+      }
+      else {
+        if (linia === '|-') {
+          colona = 1;
+        }
+        else {
+          if (colona === 0) {
+            // Aseta cualce testo estra ambos colonas (do on debe trova sola "|-").
+            linias.push(linia);
+          }
+          else if (colona === 1) {
+            // Aseta la contenida de la colona sinistra.
+            linias.push(linia);
+            colona = 2;
+          }
+        }
+      }
+    }
+    return linias.join(' ');
+  }
+  else {
+    return tota.join(' ');
+  }
+}
+
+function TrovaMalspeles(parolas) {
+  var malspeles = [];
+  var inioraLeterasMajor = Elemento('sMaj').checked;
+
+  for (var i = 0; i < parolas.length; i++) {
+    var parola = parolas[i];
+    if (parola.search(/\S/) > -1) {
+      if (inioraLeterasMajor && parola.search(/^[A-Z]/) !== -1) continue;
+      parola = parola.toLowerCase();
+      if (! EsNom(parola) && ! EsVerbo(parola) && ! EsAjetivo(parola) && ! EsOtra(parola)) {
+        parola = parolas[i];
+        if (malspeles.indexOf(parola) === -1) malspeles.push(parola);
+      }
+    }
+  }
+
+  return malspeles;
+}
+
+function EsNom(parola) {
+  var es = me.nomes[parola] || EsVerbo(parola) || EsAjetivo(parola);
+  if (! es && parola.slice(-1) === 's' && EsVocal(parola.slice(-2, -1)))
+    es = EsNom(parola.slice(0, -1));
+  if (! es && parola.slice(-2) === 'es' && ! EsVocal(parola.slice(-3, -2)))
+    es = EsNom(parola.slice(0, -2));
+  if (! es)
+    es = EsPartisipio(parola);
+  return es;
+}
+
+function EsAjetivo(parola) {
+  var es = me.ajetivos[parola];
+
+  // "Non-" es un sufisa multe produosa, e no tota posibles es formal listada
+  // en la disionario. Donce nos permete la ajunta de "non-" a alga parolas.
+  if (! es && parola.slice(0, 3) === 'non')
+    es = BonPerNon(parola.slice(3)) || BonPerNon('n' + parola.slice(3));
+
+  return es;
+}
+
+function BonPerNon(parola) {
+  return EsAjetivo(parola) || EsPartisipio(parola) || EsVerbo(parola);
+}
+
+function EsPartisipio(parola) {
+  var es = false;
+  if (! es && parola.slice(-2) === 'da' && EsVocal(parola.slice(-3, -2)))
+    es = EsVerbo(parola.slice(0, -2));
+  if (! es && parola.slice(-3) === 'nte' && EsVocal(parola.slice(-4, -3)))
+    es = EsVerbo(parola.slice(0, -3));
+  if (! es && parola.slice(-4) === 'able') {
+    es = EsVerbo(parola.slice(0, -3)) || EsVerbo(parola.slice(0, -4) + 'e') || EsVerbo(parola.slice(0, -4) + 'i');
+}
+  return es;
+}
+
+function EsVerbo(parola) {
+  return me.verbos[parola];
+}
+
+function EsOtra(parola) {
+  return me.otras[parola];
+}
+
+function EsVocal(letera) {
+  return 'aeiou'.indexOf(letera) > -1;
+}
+
+function MostraMalspeles(malspeles) {
+  var html = [];
+  if (malspeles.length > 0) {
+    html.push('<h2>La parolas seguente no es conoseda:' + BotonDeAscondeTrovadas() + '</h2>');
+    for (var i = 0; i < malspeles.length; i++) {
+      html.push('<p>' + malspeles[i]);
+    }
+  }
+  else {
+    html.push('<h2>Tota la parolas es bon.' + BotonDeAscondeTrovadas() + '</h2>');
+  }
+  Elemento('trovadas').innerHTML = html.join('');
+  MostraElemento('trovadas');
+}
+
+//-----------------------------------------------------------------------------
+
+function Xerca() {
+  if (! me.inisiada) InisiaDisionario();
+  me.controlador = Xerca;
+
+  // Colie la parametres.
+  var terma = Elemento('terma').value;
+  var regex = Elejeda('rex') ? terma : RegexDeTerma(terma);
+  var campos = Campos();
+  var simple = Elemento('elejesSimple').vidable;
+  var incluiRadises = simple || Elejeda('iRad');
+  var incluiDerivadas = simple || Elejeda('iDer');
+  var incluiBrasetidas = Elejeda('iBra');
+  var categorias = (Elejeda('fCag') || Elejeda('fCat')) ? Categorias() : [];
+  var restrinje = Elejeda('jsr') ? Elemento('jsRes').value : '';
+
+  // Fa la xerca.
+  var trovadas = Trova(regex, campos, incluiRadises, incluiDerivadas, incluiBrasetidas, categorias, restrinje);
+  CargaTrovadas(trovadas);
+}
+
+function Rexerca(nom) {
+  // La botones "Trova parolas intera" e "Trova esata" esclui mutua se.
+  var elementoNova, elementoVea;
+  if (nom === "cInt") {
+    elementoNova = Elemento("cInt");
+    elementoVea = Elemento("cEsa");
+  }
+  else if (nom === "cEsa") {
+    elementoNova = Elemento("cEsa");
+    elementoVea = Elemento("cInt");
+  }
+  if (elementoNova && elementoVea && elementoNova.checked && elementoVea.checked) {
+    elementoVea.checked = false;
+  }
+
+  if (Elemento('trovadas').vidable) {
+    Xerca();
+  }
+}
+
+function Capitol(letera) {
+  if (! me.inisiada) InisiaDisionario();
+  me.controlador = Capitol;
+
+  var regex = (letera === '') ? null : new RegExp('^' + letera, 'i');
+  // Alga nomes jeografial ave la forma "Monte Aconcagua" e apare en la disionario a la loca
+  // alfabetal de sua parola du. regex2 permete ce nos inclui "Monte Aconcagua" en la capitol A.
+  var regex2 = (letera === '') ? null : new RegExp('^[A-Za-z]+ ' + letera.toUpperCase());
+
+  var trovadas = [];
+  for (var n = 0; n < disionario.length; n++) {
+    var article = disionario[n];
+    if (article.T === 'r') {
+      if (! regex || article.lfn.search(regex) > -1 || article.lfn.search(regex2) > -1) {
+        trovadas.push(n);
+      }
+    }
+  }
+  CargaTrovadas(trovadas);
+}
+
+function NosXercaUnParolaIntera() {
+  return Elemento('elejesSimple').vidable ? Elemento('cInt').checked : (Elejeda('pInt') || Elejeda('sin'));
+}
+
+function NosXercaUnEspresaEsata() {
+  return Elemento('elejesSimple').vidable ? Elemento('cEsa').checked : Elejeda('eInt');
+}
+
+function RegexDeTerma(terma, partes, major) {
+  // Si la usor ia tape sinias cual ave sinifias spesial en un regex, trata los en un modo leteral.
+  var regex = terma.replace(/([.?*+^$[\]\\(){}|-])/g, '\\$1');
+
+  if (! NosXercaUnParolaIntera()) {
+    // Permete ce "a b" e "a-b" trova ance "ab", car la usa de spasios e ifenes no es
+    // fisada par regulas en alga linguas (spesial en engles). Vide ance SimpliSinias.
+    regex = regex.replace(/ /g, ' ?');
+    regex = regex.replace(/-/g, '-?');
+  }
+
+  if      (NosXercaUnParolaIntera())  regex = '\\b' + regex + '\\b';
+  else if (Elejeda('pCom'))           regex = '\\b' + regex;
+  else if (Elejeda('pFin'))           regex = regex + '\\b';
+  else if (NosXercaUnEspresaEsata())  regex = '^' + regex + '$';
+  else if (Elejeda('eCom'))           regex = '^' + regex;
+  else if (Elejeda('eFin'))           regex = regex + '^';
+
+  return new RegExp(regex, Elejeda('maj') ? '' : 'i');
+}
+
+function Campos() {
+  var campos = [];
+  var simplida = ! NosXercaUnParolaIntera();
+  var lingua = Elemento('elejesSimple').vidable ? Elemento('linguaSimple').value : '';
+
+  // Construi un lista de la campos en cual la usor vole xerca. Si el no ia eleje distingui
+  // spasios, sinietas, e ifenes, nos usa la valuas simplida cual nos ia construi con SimpliSinias
+  // en InisiaDisionario.
+  if (Elejeda('def')) campos.push('defini');
+  if (Elejeda('lfn') || lingua === 'lfn' || lingua === 'tota') campos.push(simplida ? 'lfn_' : 'lfn');
+  for (var i = 0; i < me.listaDeLinguas.length; i++) {
+    var li = me.listaDeLinguas[i];
+    if (Elejeda(li) || lingua === li || lingua === 'tota') campos.push(simplida ? li + '_' : li);
+  }
+
+  return campos;
+}
+
+function Categorias() {
+  var categorias = [];
+
+  // Construi un lista de la categorias cual la usor vole permete.
+  for (var i = 0; i < me.listaDeCategorias.length; i++) {
+    var corta = me.listaDeCategorias[i].corta;
+    var eleje = Elemento('cat' + corta);
+    if (eleje.checked) categorias.push(corta);
+  }
+
+  return categorias;
+}
+
+function Trova(regex, campos, incluiRadises, incluiDerivadas, incluiBrasetidas, categorias, restrinje) {
+  var trovadas = [];
+  var bon = false;
+
+//  try {
+    // Visita cada article. Si lo conforma, ajunta lo a la lista de "trovadas".
+    for (var n = 0; n < disionario.length; n++) {
+      var article = disionario[n];
+
+      // Si la usor vole filtri par categoria (e no ia deseleje tota la categorias),
+      // considera esta article sola si lo parteni a tota la categorias elejeda.
+      if (! categorias || ArticleAveCategorias(article, categorias)) {
+        var t = article.T;
+
+        // Considera un radis sola si la usor vole xerca en radises. La mesma per derivadas.
+        // La tipo tre de article es 's', cual es un otra sinifia de la article presedente,
+        // e nos considera lo sola si nos ia considera ance la presedente (cual es per dise:
+        // sola si la presedente ia es "bon").
+        bon = (t === 'r' && incluiRadises || t === 'd' && incluiDerivadas || t === 's' && bon);
+
+        if (bon && TrovaEnArticle(article, regex, campos, incluiBrasetidas, restrinje)) {
+          trovadas.push(n);
+        }
+      }
+    }
+//  }
+//  catch(e) {
+//    // Si un eseta aveni, redona "trovadas" en un forma spesial cual indica a MostraTrovadas
+//    // ce lo debe siniali un problem en loca de lista la trovadas en la manera normal.
+//    if (e === -1) trovadas = [-1, 'Tua restrinje no es valida.'];
+//    else          trovadas = [-1, 'La xercador ia encontra un problem: ' + e];
+//  }
+
+  return trovadas;
+}
+
+function TrovaEnArticle(article, regex, campos, incluiBrasetidas, restrinje) {
+  // Si la usor ia ajunta sua restrinje propre, evalua lo, e iniora la article si la valua es falsa.
+  if (! restrinje || EvaluaRestrinje(article, restrinje)) {
+
+    // Xerca en cada campo elejeda par la usor. Sorti direta cuando nos trova un campo conformante.
+    for (var c = 0; c < campos.length; c++) {
+      var campo = campos[c];
+      var testo = article[campo];
+
+      // Sutrae cualce testo entre brasetas ronda.
+      if (! incluiBrasetidas) testo = testo.replace(/\(.*?\)/g, '');
+
+      // Sutrae sulinis e brasetas risa - los es mera tipografial.
+      testo = testo.replace(/[_{}]/g, '');
+
+      if (campo === 'en' || campo === 'en_') {
+        testo = DespaciSpelesEngles(testo, false);
+      }
+
+      if (testo && testo.search(regex) !== -1) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function EvaluaRestrinje($, restrinje) {
+  try {
+    // La restrinje debe es un espresa con valua vera o falsa.
+    // Lo pote asede la article presente como "$".
+    return eval(restrinje);
+  }
+  catch(e) {
+    //throw -1;
+  }
+}
+
+function ArticleAveCategorias(article, categorias) {
+  var cat = article.categorias;
+  for (var i = 0; i < categorias.length; i++) {
+    if (cat.indexOf(categorias[i]) === -1) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function CargaTrovadas(trovadas) {
+  // Presenta la resultas. Si ave multe de los, la surfador pote resta ocupada tra alga
+  // secondos en cuando lo ajunta la HTML de la resultas a la paje, donce en esta caso
+  // nos permete ce lo mostra la mesaje "Cargante…" ante la comensa de la labora.
+  if (trovadas.length > 500) {
+    Elemento('trovadas').innerHTML = '<h2>Cargante…</h2>';
+    Elemento('form').style.color = '#888';
+    setTimeout(function () {
+      MostraTrovadas(trovadas);
+      var form = Elemento('form');
+      if (form) form.style.color = '#000';
+    }, 25);
+  }
+  else {
+    MostraTrovadas(trovadas);
+  }
+  MostraElemento('trovadas');
+}
+
+function MostraTrovadas(trovadas) {
+  if (trovadas.length === 2 && trovadas[0] === -1) {
+    // Un eseta ia aveni.
+    Elemento('trovadas').innerHTML = '<h2>' + trovadas[1] + BotonDeAscondeTrovadas() + '</h2>';
+  }
+  else {
+    // Colie la parametres.
+    var simple = Elemento('elejesSimple').vidable;
+    var lingua = simple ? Elemento('linguaSimple').value : '';
+    var totaLinguas = lingua === 'tota' || lingua === 'lfn';
+    var mostra = {
+      cat:      simple || Elejeda('mCat'),
+      def:      simple || Elejeda('mDef'),
+      completa: Elejeda('mArt') || me.controlador === Capitol,
+      imajes:   simple ? Elemento('cIma').checked : Elejeda('ima'),
+      primable: simple ? false : Elejeda('pri')
+    }
+
+    for (var i = 0; i < me.listaDeLinguas.length; i++) {
+      var li = me.listaDeLinguas[i];
+      mostra[li] = Elejeda('m' + me.lista2DeLinguas[i]) || totaLinguas || lingua === li;
+    }
+
+    // La varia primable es plu compata ca la varia normal.
+    mostra.spasio = mostra.primable ? ' ' : ' &nbsp; ';
+    mostra.br     = mostra.primable ? ' ' : '<br>';
+
+    // La varia primable indica la lingua de cada tradui sola si ave plu ca un lingua.
+    mostra.linguas = 0;
+    for (i = 0; i < me.listaDeLinguas.length; i++) {
+      if (mostra[me.listaDeLinguas[i]]) mostra.linguas++;
+    }
+
+    var html = HtmlPerTrovadas(trovadas, mostra);
+
+    if (mostra.primable) {
+      document.write(StiloPrimable());
+      document.write(html);
+      document.close();
+      return;
+    }
+    else {
+      Elemento('trovadas').innerHTML = html;
+    }
+  }
+
+  // Lasa la usor en la caxa de la terma, con tota la testo marcada, afin el pote fa direta
+  // un xerca nova si el desira. Si el vole usa la teclador per rola la paje a su (per vide
+  // tota partes de la lista de trovadas), el pote presa Shift+Tab e usa la teclas de naviga.
+  if (! ScermoEsTocable()) {
+    Elemento('terma').focus();
+    Elemento('terma').select();
+  }
+}
+
+function HtmlPerTrovadas(trovadas, mostra) {
+  var html = [];
+  var articles = 0;
+  var radisCorente;
+
+  for (var t = 0; t < trovadas.length; t++) {
+    var n = trovadas[t];
+    var article = disionario[n];
+    var radis = article.radis;
+
+    if (mostra.completa) {
+      // Si la usor vole vide tota derivadas e sinifias de cada article, an los cual no conteni
+      // sua terma de xerca, nos jenera la HTML per la radis e tota sua dependentes en segue.
+      var nSeguente = HtmlPerArticleCompleta(html, radis, mostra);
+
+      // Avansa tra la lista de trovadas, iniorante cualce derivadas e otra sinifias cual es ja
+      // incluida en la HTML cual nos veni de jenera.
+      while (t + 1 < trovadas.length && trovadas[t + 1] < nSeguente) {
+        t++;
+      }
+
+      // La radis e tota sua dependentes formi sola un article en la mente de la usor.
+      articles++;
+    }
+    else if (article.T === 'r') {
+      // Nos ia trova un radis conformante.
+      HtmlPerArticle(html, article, mostra, false);
+      radisCorente = article;
+      articles++;
+    }
+    else {
+      // Nos ia trova un derivada o otra sinifia conformante. Nos mostra sempre a la min la titulo
+      // de cada article conformante, donce si esta article parteni a un radis nonconformante,
+      // nos ajunta un varia cortida (sola la titulo) de la HTML de acel radis.
+      if (radis !== radisCorente) {
+        HtmlPerArticle(html, disionario[radis.indise], mostra, true);
+        radisCorente = radis;
+        articles++;
+      }
+      HtmlPerArticle(html, article, mostra, false);
+    }
+  }
+
+  if (! mostra.primable) {
+    // Informa la usor cuanto "articles" nos ia trova. Par "articles" asi nos vole dise "radises".
+    html.unshift('<h2>' + articles + ' article' + (articles === 1 ? '' : 's') + ' trovada.' +
+                 BotonDeAscondeTrovadas() + '</h2>');
+  }
+
+  return html.join('');
+}
+
+function HtmlPerArticleCompleta(html, radis, mostra) {
+  // Construi un lista de tota partes de la article: la radis, cualce otra sinifias de la radis,
+  // la derivadas, e cualce otra sinifias de cada derivada.
+  var partes = [radis];
+  partes = partes.concat(radis.otraSinifias);
+  for (var d = 0; d < radis.derivadas.length; d++) {
+    var derivada = radis.derivadas[d];
+    partes.push(derivada);
+    partes = partes.concat(derivada.otraSinifias);
+  }
+
+  // Jenera la HTML per cada parte.
+  for (var p = 0; p < partes.length; p++) {
+    HtmlPerArticle(html, partes[p], mostra, false);
+  }
+
+  // Redona la numero de la article seguente la final cual nos ia visita asi.
+  return radis.indise + partes.length;
+}
+
+function HtmlPerArticle(html, article, mostra, solaTitulo) {
+  // Ajunta un titulo si la article es un radis o un derivada.
+  if (article.T !== 's') {
+    // Comensa un paragraf nova per un radis, e ance per un derivada si nos no jenera la varia primable.
+    // Nos clui nunca la elemento <p>. Sua eticeta cluinte es ometable en HTML. Esta es fortunosa car,
+    // si no, nos ta debe clui lo a la momento coreta en la flue de articles de tipos variosa, e acel
+    // ta pote deveni alga complicada.
+    if (article.T === 'r') {
+      html.push('<p class="radis">');
+      if (mostra.imajes && article.imaje && !mostra.primable && !solaTitulo) html.push(HtmlPerImaje(article));
+    }
+    else if (mostra.primable) html.push(' &#xBB; ')
+    else {
+      html.push('<p class="derivada">');
+      if (mostra.imajes && article.imaje) html.push(HtmlPerImaje(article));
+      html.push('&#xBB; &nbsp;');
+    }
+
+    html.push('<span class="lfn">');
+    var lfn = article.lfn;
+
+    // Cambia "…" a “…”.
+    lfn = lfn.replace(/"(.*?)"/g, "&#x2018;$1&#x2019;");
+
+    html.push(lfn);
+    html.push('</span>');
+
+    if (mostra.cat && article.cat.length > 0) {
+      html.push(mostra.spasio);
+      html.push('<span class="categoria">');
+      html.push(mostra.primable ? HtmlPrimablePerCategorias(article.cat) : article.cat_);
+      html.push('</span>');
+    }
+  }
+
+  if (! solaTitulo) {
+    // Esta variable es falsa asta cuando la numero de un sinifia es ajuntada.
+    var numerida = false;
+
+    if (mostra.def) {
+      if (article.pronunsia) {
+        html.push(mostra.spasio);
+        html.push('<span class="pronunsia">');
+        if (! mostra.primable) html.push('(dise ');
+        html.push('&#x2018;');
+        html.push(article.pronunsia);
+        html.push('&#x2019;');
+        if (! mostra.primable) html.push(')');
+        html.push('</span>');
+      }
+
+      if (article.simbol) {
+        html.push(mostra.spasio);
+        html.push('<span class="simbol">');
+        html.push('«');
+        if (! mostra.primable) html.push('<span class="sim">');
+        html.push(article.simbol);
+        html.push('</span>»');
+        html.push('</span>');
+      }
+
+      if (article.defini) {
+        html.push(mostra.br);
+        numerida = HtmlPerNumeroDeSinifia(html, article, mostra, numerida);
+        html.push('<span class="defini">');
+        var defini = article.defini.replace(/^(\(?)([a-z])/, function(s, b, c) { return b + c.toUpperCase(); })
+                                   .replace(/_(.*?)_/g, '<i>$1</i>')
+                                   .replace(/[{}]/g, '')
+                                   .replace(/\((.*?)\)/g, '<span class="brasetida">(<i>$1</i>)</span>');
+        html.push(defini);
+        if (article.gramatica && ! mostra.primable) html.push('.' + HtmlPerLiaALaVici(article.gramatica) + '</span>');
+      }
+
+      if (article.capital) {
+        html.push(mostra.br);
+        numerida = HtmlPerNumeroDeSinifia(html, article, mostra, numerida);
+        html.push('(', 'capital: ', article.capital);
+        if (mostra.primable) html.push('.');
+        html.push(')');
+      }
+
+      if (article.tason) {
+        html.push(mostra.br);
+        numerida = HtmlPerNumeroDeSinifia(html, article, mostra, numerida);
+        if (mostra.primable) html.push('(');
+        html.push('<span class="tasonomia">');
+        html.push(article.tason.replace(/[{}]/g, ''));
+        html.push('</span>');
+        if (mostra.primable) html.push('.)');
+      }
+
+      if (article.nota) {
+        html.push(mostra.br);
+        numerida = HtmlPerNumeroDeSinifia(html, article, mostra, numerida);
+        html.push('<span class="nota"><span class="lingua">nb</span>');
+        html.push(mostra.spasio);
+        html.push(article.nota.replace(/_(.*?)_/g, '<i>$1</i>')
+                              .replace(/`(.*?)`/g, '"$1"')
+                              .replace(/[{}]/g, ''));
+        html.push('</span>');
+      }
+
+      if (article.usa) {
+        html.push(mostra.br);
+        numerida = HtmlPerNumeroDeSinifia(html, article, mostra, numerida);
+        html.push('<span class="usa">');
+        if (mostra.primable) html.push('[');
+        else                 html.push('&#x2039; ');
+        html.push(article.usa);
+        if (mostra.primable) html.push('.]');
+        else                 html.push(' &#x203A;');
+
+        html.push('</span>');
+      }
+
+      if (article.vide) {
+        html.push(mostra.br);
+        numerida = HtmlPerNumeroDeSinifia(html, article, mostra, numerida);
+        html.push('<span class="vide">&#x2192; ');
+        html.push(article.vide);
+        html.push('</span>');
+      }
+    }
+
+    // Ajunta cualce traduis.
+    for (var i = 0; i < me.listaDeLinguas.length; i++) {
+      numerida = HtmlPerTradui(html, article, mostra, numerida, me.listaDeLinguas[i]);
+    }
+  }
+}
+
+function HtmlPerTradui(html, article, mostra, numerida, lingua) {
+  if (mostra[lingua]) {
+    var tradui = article[lingua];
+
+    // Iniora traduis mancante.
+    if (tradui) {
+      html.push(mostra.br);
+      numerida = HtmlPerNumeroDeSinifia(html, article, mostra, numerida);
+
+      if (! mostra.primable || mostra.linguas > 1) {
+        html.push('<span class="lingua">');
+        html.push(lingua);
+        html.push(mostra.spasio);
+        html.push('</span>');
+      }
+
+      // Cambia "…" a “…”, ' a ’, e sulinis a leteras apoiada.
+      tradui = tradui.replace(/"(.*?)"/g, "&#x2018;$1&#x2019;")
+                     .replace(/'/g, "&#x2019;")
+                     .replace(/_(.*?)_/g, '<i>$1</i>');
+
+      // Dona un aspeta min forte a informas brasetida.
+      tradui = tradui.replace(/(\(.*?\))/g, '<span class="brasetida">$1</span>');
+
+      if (lingua === "en") {
+        tradui = DespaciSpelesEngles(tradui, true);
+      }
+
+      if (lingua === "he") {
+//        tradui = tradui.replace(/([\u0590-\u05FF\uFB1D-\uFB4F]+)/g, '<span dir="rtl">$1</span>');
+        tradui = '<span dir="rtl">' + tradui + '</span>';
+      }
+
+      html.push('<span class="tradui">');
+      html.push(tradui);
+      html.push('</span>');
+      if (mostra.primable) html.push('.');
+    }
+  }
+
+  return numerida;
+}
+
+function DespaciSpelesEngles(testo, html) {
+  // En traduis engles, la sinia | separa un spele american de un spele brites: traveler|traveller.
+  // En multe casos, la spele brites es compatida a sola du leteras.
+  // "|is" indica ce on debe sustitui "is" per la esemplo LA PLU DESTRA de "iz" en la spele american:
+  //   realize|is, realized|is, realizing|is, realization|is, realizer|is, realizable|is
+  // E ance simil con la seguentes:
+  //   analyze|ys, theater|re, defense|ce, color|ur, colored|ur, colors|ur, catalog|ue
+
+  testo = testo.replace(/([-a-zA-Z']+)\|([-a-zA-Z']+)/g, function(testo, american, brites) {
+    if (brites === 'is') {
+      brites = american.replace(/iz(?!.*iz)/, 'is');
+    }
+    else if (brites === 're') {
+      brites = american.replace(/er(?!.*er)/, 're');
+    }
+    else if (brites === 'ae') {
+      brites = american.replace(/e(?!.*e)/, 'ae');
+    }
+    else if (brites === 'oe') {
+      brites = american.replace(/e(?!.*e)/, 'oe');
+    }
+    else if (brites === 'ce') {
+      brites = american.replace(/se(?!.*se)/, 'ce');
+    }
+    else if (brites === 'll') {
+      brites = american.replace(/l(?!.*l)/, 'll');
+    }
+    else if (brites === 'ur') {
+      brites = american.replace(/or(?!.*or)/, 'our');
+    }
+    else if (brites === 'ul') {
+      brites = american.replace(/ol(?!.*ol)/, 'oul');
+    }
+    else if (brites === 'ys') {
+      brites = american.replace(/yz(?!.*yz)/, 'ys');
+    }
+    else if (brites === 'ue') {
+      brites = american.replace(/og(?!.*og)/, 'ogue');
+    }
+    else if (brites === 'ph') {
+      brites = american.replace(/f(?!.*f)/, 'ph');
+    }
+    return american + (html ? '<span class="am-br">' : '') + '/' + (html ? '</span>' : '') + brites;
+  });
+
+  return testo;
+}
+
+function HtmlPerNumeroDeSinifia(html, article, mostra, numerida) {
+  // Numeri la sinifia prima sola si la parola ave otra sinifias.
+  if (! numerida && article.prima.otraSinifias.length > 0) {
+    html.push('<span class="sinifia">');
+    html.push(article.numero);
+    html.push('</span>');
+    html.push(mostra.spasio);
+
+    if (mostra.cat && article.cats.length > 0) {
+      html.push('<span class="categoria">');
+      html.push(mostra.primable ? HtmlPrimablePerCategorias(article.cats) : article.cats_);
+      html.push('</span>');
+      html.push(article.defini ? mostra.spasio : mostra.br);
+    }
+  }
+
+  // Indica a la resta de esta sinifia ce nos ia numeri la sinifia
+  // (o ce nos ia deside no numeri lo, car ave sola un sinifia).
+  return true;
+}
+
+function HtmlPrimablePerCategorias(cat) {
+  var categorias = [];
+
+  // Construi un lista de la categorias gramatical de un article. Nos no inclui la
+  // categorias semantical en la varia primable, car los ta peri paper e no ta aida multe.
+  for (var i = 0; i < cat.length; i++) {
+    var categoria = me.tableDeCategorias[cat[i]];
+    if (categoria && categoria.gramatical) {
+      categorias.push(categoria.corta + '.');
+    }
+  }
+
+  return categorias.join(' ');
+}
+
+function HtmlPerLiaALaVici(lia) {
+  if (lia) {
+    return ' &nbsp; <a href="http://lfn.wikia.com/wiki/' + lia + '">(Leje plu&hellip;)</a>';
+  }
+  return '';
+}
+
+function HtmlPerImaje(article) {
+  var html = [];
+  var imajes = article.imaje.split(",");
+  for (var i = 0; i < imajes.length; i++) {
+    var url = imajes[i].replace(/^\s/, "").replace(/\s$/, "");
+    if (url === '#') {
+      url = article.lfn.replace(/ /g, '-').replace(/-\(.*?\)/g, "");
+    }
+    url = 'http://elefen.org/disionario/imajetas/' + url + '.jpg';
+    me.numeroDeImaje++;
+    html.push('<img id="imaje' + me.numeroDeImaje + '" class="imaje imaje-peti" src="' + url +
+              '" onclick="ClicaImaje(' + me.numeroDeImaje + ');" title="' + article.lfn + '">');
+  }
+  return html.join(" ");
+}
+
+function ClicaImaje(id) {
+  var imaje = Elemento('imaje' + id);
+  if (imaje) {
+    var partes = imaje.src.split("/");
+    if (partes.length >= 2) {
+      var tipo = partes[partes.length - 2];
+      if (tipo === 'imajetas') {
+        tipo = 'imajes';
+        imaje.className = 'imaje imaje-grande';
+      }
+      else if (tipo === 'imajes') {
+        tipo = 'imajetas';
+        imaje.className = 'imaje imaje-peti';
+      }
+      imaje.src = tipo + '/' + partes[partes.length - 1];
+    }
+  }
+}
+
+function StiloPrimable() {
+  // Stilos multe simple per la varia primable.
+  var css = ['<style>'];
+  css.push('* { margin: 0; padding: 0; }');
+  css.push('body { background-color: #FFF; color: #000; font-size: small; margin: 1em; }');
+  css.push('p { margin-left: 1em; text-indent: -1em; }');
+  css.push('p.radis { margin-top: 0.2em; }');
+  css.push('.lfn { font-weight: bold; }');
+  css.push('.categoria { font-style: italic; }');
+  css.push('.sinifia { font-weight: bold; }');
+  css.push('.tasonomia { font-style: italic; }');
+  css.push('.lingua { font-variant: small-caps; }');
+  css.push('</style>');
+  return css.join('\n');
+}
+
+function InisiaSinietas() {
+  var sinias = ['['];
+
+  var listaDeSinietas = [
+    'À', 'A',   'Á', 'A',   'Â', 'A',   'Ã', 'A',   'Ä', 'A',   'Å', 'A',
+    'Ç', 'C',   'È', 'E',   'É', 'E',   'Ê', 'E',   'Ë', 'E',
+    'Ì', 'I',   'Í', 'I',   'Î', 'I',   'Ï', 'I',   'Ñ', 'N',
+    'Ò', 'O',   'Ó', 'O',   'Ô', 'O',   'Õ', 'O',   'Ö', 'O',   'Ø', 'O',
+    'Ù', 'U',   'Ú', 'U',   'Û', 'U',   'Ü', 'U',
+    'à', 'a',   'á', 'a',   'â', 'a',   'ã', 'a',   'ä', 'a',   'å', 'a',
+    'ç', 'c',   'è', 'e',   'é', 'e',   'ê', 'e',   'ë', 'e',
+    'ì', 'i',   'í', 'i',   'î', 'i',   'ï', 'i',   'ñ', 'n',
+    'ò', 'o',   'ó', 'o',   'ô', 'o',   'õ', 'o',   'ö', 'o',   'ø', 'o',
+    'ù', 'u',   'ú', 'u',   'û', 'u',   'ü', 'u',
+// si nos defini estas, la usor nesesa tape "suo" per trova "ŝuo" - esta no pare un bon idea
+//    // Sinietas de esperanto:
+//    'Ĉ', 'C',   'ĉ', 'c',
+//    'Ĝ', 'G',   'ĝ', 'g',
+//    'Ĥ', 'H',   'ĥ', 'h',
+//    'Ĵ', 'J',   'ĵ', 'j',
+//    'Ŝ', 'S',   'ŝ', 's',
+//    'Ŭ', 'U',   'ŭ', 'u',
+    // La seguentes es la sola otra sinietas cual nos ave ja en la disionario:
+    'č', 'c',
+    'ł', 'l'
+  ];
+
+  // Construi un table per converti cada letera con sinieta a un letera simple.
+  me.tableDeSinietas = {};
+  for (var i = 0; i < listaDeSinietas.length; i += 2) {
+    var sinieta = listaDeSinietas[i];
+    var simplida = listaDeSinietas[i + 1];
+    me.tableDeSinietas[sinieta] = simplida;
+
+    // Ajunta la sinieta a la regex.
+    sinias.push(sinieta);
+  }
+
+  // Crea un regex per usa en SimpliSinias.
+  sinias.push(']');
+  me.regexDeSinietas = new RegExp(sinias.join(''), 'g');
+}
+
+function InisiaDisionario() {
+  InisiaSinietas();
+
+  // Esta tables es usada par la spelador.
+  me.nomes = {};
+  me.verbos = {};
+  me.ajetivos = {};
+  me.otras = {};
+
+  // En la sicle seguente, "radis" va es la radis la plu resente, e "prima" va es
+  // o la article presente o (per un otra sinifia) la article de la sinifia prima.
+  var radis, prima;
+  for (var n = 0; n < disionario.length; n++) {
+    var article = disionario[n];
+
+    // Cada article ave un lista de derivadas e un lista de otra sinifias, an si los es vacua.
+    // Esta simpli la scrive de restrinjes par la usor.
+    article.derivadas = [];
+    article.otraSinifias = [];
+
+    // article.T es la tipo de la article. On ave tre posibles: "r" per un radis, "d" per
+    // un derivada, e "s" per un otra sinifia (un sinifia pos la prima, cual es "r" o "d").
+    // "d" no es indicada en datos.js: nos dedui lo par la asentia de cualce otra tipo.
+    if (! article.T) {
+      article.T = "d";
+      radis.derivadas.push(article);
+    }
+    if (article.T === 'r') radis = article;
+
+    if (article.T === 's') prima.otraSinifias.push(article);
+    else                   prima = article;
+
+    article.radis = radis;
+    article.prima = prima;
+
+    // article.numero es la numero de sinifia. Cada article ave lo, an si lo es simple 1.
+    article.numero = 1 + prima.otraSinifias.length;
+
+    // article.indise es la indise de la article en la variable "disionario".
+    article.indise = n;
+
+    // Si partes de un article manca, nos furni valuas vacua asi.
+    // Estas simpli la scrive de restrinjes par la usor.
+    article.lfn  = article.L    || prima.lfn || '';  // parola o espresa en elefen
+    article.cat  = article.C    || [];               // lista de categorias corta
+    article.cats = article.cats || [];               // categorias de la sinifia
+
+    // Si la article es un radis o un derivada, nos nota sua categorias fundal.
+    if (article.T !== 's') article.catFundal = article.cat.slice(0);
+
+    // Alora, nos ajunta a acel categorias cualce otras cual pertine sola a la
+    // sinifia presente ("article.cats"). An un radis o derivada pote ave tal
+    // categorias, car lo representa ance la sinifia prima a la mesma tempo.
+    article.categorias = article.cat.slice(0).concat(article.cats);
+
+    // Final, si esta no es la sinifia prima, nos ajunta a lo la categorias fundal
+    // de sua radis o derivada. "article.categorias" es la lista en cual nos va
+    // xerca a pos. "article.cat" e "article.cats" es sola per presenta la resultas.
+    if (article.T === 's') article.categorias = article.categorias.concat(prima.catFundal);
+
+    article.capital   = article.c || '';  // capital de pais
+    article.defini    = article.d || '';  // defini
+    article.gramatica = article.g || '';  // lia a la vici
+    article.imaje     = article.i || '';  // imaje(s)
+    article.nota      = article.n || '';  // nota sur usa
+    article.pronunsia = article.p || '';  // pronunsia
+    article.simbol    = article.s || '';  // simbol
+    article.tason     = article.t || '';  // nomes tasonomial
+    article.usa       = article.u || '';  // esemplos de usa
+    article.vide      = article.v || '';  // vide ance
+
+    // Traduis en linguas variosa. Nos jenera ance varias de la traduis cual nos va usa
+    // si la usor eleje no distingui spasios, sinietas, e ifenes.
+    article.lfn_ = SimpliSinias(article.lfn);
+    for (var i = 0; i < me.listaDeLinguas.length; i++) {
+      var li = me.listaDeLinguas[i];
+      article[li] = article[li] || '';
+      article[li + '_'] = SimpliSinias(article[li]);
+    }
+
+    // Preconstrui la descrive de la categorias de la article.
+    for (var grado = 0; grado < 2; grado++) {
+      var cat = grado === 0 ? article.cat : article.cats;
+      if (cat) {
+        var categorias = [];
+        var categorias_ = [];
+        for (i = 0; i < cat.length; i++) {
+          var c = cat[i];
+          var categoria = me.tableDeCategorias[c];
+          if (categoria) {
+            categorias.push(categoria.longa);
+            // Nos no inclui plu la categorias semantical en la presenta. Los es sola per aida la xercas.
+            if (categoria.gramatical) categorias_.push(categoria.longa);
+          }
+
+          // Clasi tota parolas de elefen en cuatro caxas simple, per aida la spelador.
+          if (grado === 0 && article.T !== 's') {
+            var formaSimplida = article.lfn.toLowerCase().replace(/ \(.*?\)/g, "");
+            if (c === "n")                        me.nomes[formaSimplida] = true;
+            else if (c === "vnt" || c === "vt" ||
+                     c === "vl" || c === "v")     me.verbos[formaSimplida] = true;
+            else if (c === "a")                   me.ajetivos[formaSimplida] = true;
+            else                                  me.otras[formaSimplida] = true;
+          }
+        }
+        if (grado === 0) article.cat_  = categorias_.join(', ');
+        else             article.cats_ = categorias_.join(', ');
+      }
+    }
+  }
+
+  me.inisiada = true;
+}
+
+function SimpliSinias(x) {
+  if (x) {
+    // Sutrae spasios e ifenes. Esta permete ce "ab" trova ance "a-b" e "a b".
+    // Vide ance RegexDeTerma.
+    x = x.replace(/ /g, '');
+    x = x.replace(/-/g, '');
+
+    // Sustitui la letera simple cual coresponde a cada letera con sinieta.
+    x = x.replace(me.regexDeSinietas, function(sinia) {
+      return me.tableDeSinietas[sinia];
+    });
+  }
+
+  return x;
+}
+
+function MostraElemento(nom, boton, stilo) {
+  var elemento = Elemento(nom);
+  if (elemento) {
+    elemento.style.display = stilo || 'block';
+    elemento.vidable = true;
+    if (boton) Elemento(boton).value = 'Asconde ' + nom;
+
+    if (nom === 'elejes') AscondeElemento('elejesSimple');
+
+    // La aida apare pos la trovadas, ma la trovadas pote es alga longa. Nos vole ce la usor
+    // vide sempre la aida cuando el clica "Aida", donce nos rola la scermo per mostra la aida.
+    if (nom === 'aida' && elemento.scrollIntoView) elemento.scrollIntoView();
+  }
+}
+
+function AscondeElemento(nom, boton) {
+  var elemento = Elemento(nom);
+  if (elemento) {
+    elemento.style.display = 'none';
+    elemento.vidable = false;
+    if (boton) Elemento(boton).value = nom.slice(0, 1).toUpperCase() + nom.slice(1) + '...';
+
+    if (nom === 'elejes') MostraElemento('elejesSimple');
+  }
+}
+
+function Alterna(nom, boton) {
+  var elemento = Elemento(nom);
+  if (elemento) {
+    if (elemento.vidable) AscondeElemento(nom, boton);
+    else                  MostraElemento(nom, boton);
+  }
+  Refresci();
+}
+
+function Elemento(nom) {
+  return document.getElementById(nom);
+}
+
+function Elejeda(nom) {
+  return Elemento('elejes').vidable && Elemento(nom).checked;
+}
+
+function BotonDeAscondeTrovadas() {
+  return ' &nbsp; <input type="button" value="Asconde" onclick="AscondeElemento(\'trovadas\')">';
+}
+
+function InisiaIE() {
+  // Varias vea de Internet Explorer no ia conteni Array.indexOf.
+  if (! Array.prototype.indexOf) {
+    Array.prototype.indexOf = function(obj, start) {
+      for (var i = (start || 0), j = this.length; i < j; i++) {
+        if (this[i] === obj) return i;
+      }
+      return -1;
+    }
+  }
+}
+
+function InisiaCategorias() {
+  me.listaDeCategorias = [
+    { gramatical: true,  corta: 'a',    longa: 'ajetivo' },
+    { gramatical: true,  corta: 'av',   longa: 'averbo' },
+    { gramatical: true,  corta: 'cj',   longa: 'conjunta' },
+    { gramatical: true,  corta: 'c',    longa: 'corti' },
+    { gramatical: true,  corta: 'd',    longa: 'determinante' },
+    { gramatical: true,  corta: 'esc',  longa: 'esclama' },
+    { gramatical: true,  corta: 'esp',  longa: 'espresa' },
+    { gramatical: true,  corta: 'n',    longa: 'nom' },
+    { gramatical: true,  corta: 'pl',   longa: 'plural' },
+    { gramatical: true,  corta: 'pf',   longa: 'prefisa' },
+    { gramatical: true,  corta: 'pren', longa: 'prenomal' },
+    { gramatical: true,  corta: 'prep', longa: 'preposada' },
+    { gramatical: true,  corta: 'prev', longa: 'preverbal' },
+    { gramatical: true,  corta: 'pron', longa: 'pronom' },
+    { gramatical: true,  corta: 'sim',  longa: 'simbol' },
+    { gramatical: true,  corta: 'sf',   longa: 'sufisa' },
+    { gramatical: true,  corta: 'sj',   longa: 'sujunta' },
+    { gramatical: true,  corta: 'tro',  longa: 'tronco' },
+    { gramatical: true,  corta: 'v',    longa: 'verbo' },
+    { gramatical: true,  corta: 'vt',   longa: 'verbo transitiva' },
+    { gramatical: true,  corta: 'vnt',  longa: 'verbo nontransitiva' },
+    { gramatical: true,  corta: 'vl',   longa: 'verbo liante' },
+    { gramatical: true,  corta: 'na',   longa: 'composada (nom+ajetivo)' },
+    { gramatical: true,  corta: 'nn',   longa: 'composada (nom+nom)' },
+    { gramatical: true,  corta: 'vn',   longa: 'composada (verbo+nom)' },
+
+    { gramatical: false, corta: 'amf',  longa: 'amfibio' },
+    { gramatical: false, corta: 'anat', longa: 'anatomia' },
+    { gramatical: false, corta: 'ani',  longa: 'animal' },
+    { gramatical: false, corta: 'arci', longa: 'arciteta/mobilas' },
+    { gramatical: false, corta: 'arte', longa: 'arte' },
+    { gramatical: false, corta: 'artr', longa: 'artropodo' },
+    { gramatical: false, corta: 'ast',  longa: 'astronomia' },
+    { gramatical: false, corta: 'avia', longa: 'avia' },
+    { gramatical: false, corta: 'bio',  longa: 'biolojia/ecolojia' },
+    { gramatical: false, corta: 'cim',  longa: 'cimica' },
+    { gramatical: false, corta: 'col',  longa: 'color' },
+    { gramatical: false, corta: 'cos',  longa: 'cosini' },
+    { gramatical: false, corta: 'dem',  longa: 'demonim' },
+    { gramatical: false, corta: 'dino', longa: 'dinosauro' },
+    { gramatical: false, corta: 'fil',  longa: 'filosofia' },
+    { gramatical: false, corta: 'fis',  longa: 'fisica' },
+    { gramatical: false, corta: 'gov',  longa: 'governa' },
+    { gramatical: false, corta: 'info', longa: 'informatica' },
+    { gramatical: false, corta: 'ins',  longa: 'inseto' },
+    { gramatical: false, corta: 'info', longa: 'informatica' },
+    { gramatical: false, corta: 'ist',  longa: 'istoria' },
+    { gramatical: false, corta: 'jeo',  longa: 'jeografial' },
+    { gramatical: false, corta: 'ling', longa: 'linguistica' },
+    { gramatical: false, corta: 'mam',  longa: 'mamal' },
+    { gramatical: false, corta: 'mat',  longa: 'matematica' },
+    { gramatical: false, corta: 'med',  longa: 'medica' },
+    { gramatical: false, corta: 'mit',  longa: 'mitolojia' },
+    { gramatical: false, corta: 'mol',  longa: 'molusco' },
+    { gramatical: false, corta: 'mone', longa: 'mone' },
+    { gramatical: false, corta: 'mus',  longa: 'musica/dansa' },
+    { gramatical: false, corta: 'nonv', longa: 'nonvertebrato' },
+    { gramatical: false, corta: 'onom', longa: 'onomatopea' },
+    { gramatical: false, corta: 'pex',  longa: 'pex' },
+    { gramatical: false, corta: 'pla',  longa: 'planta' },
+    { gramatical: false, corta: 'rel',  longa: 'relijio' },
+    { gramatical: false, corta: 'ret',  longa: 'retil' },
+    { gramatical: false, corta: 'uma',  longa: 'siensa umana' },
+    { gramatical: false, corta: 'spo',  longa: 'sporte/juas' },
+    { gramatical: false, corta: 'tecn', longa: 'tecnical' },
+    { gramatical: false, corta: 'tera', longa: 'tera' },
+    { gramatical: false, corta: 'util', longa: 'utiles/aparatos' },
+    { gramatical: false, corta: 'vec',  longa: 'veculos' },
+    { gramatical: false, corta: 'vest', longa: 'vestes/moda' }
+  ];
+
+  // Construi la table de categorias, cual permete oteni la ojeto de un categoria
+  // cuando on conose sola la corti corespondente. A la mesma tempo, crea HTML per
+  // la aparatetas cual apare cuando la usor clica "Filtri par categoria".
+  me.tableDeCategorias = {};
+
+  AjuntaHtmlPerCategorias(true, 'true', 'categorias-g');
+  AjuntaHtmlPerCategorias(false, 'false', 'categorias-s');
+}
+
+function AjuntaHtmlPerCategorias(gramatical, sGramatical, nom) {
+  var html = ['<br>&nbsp; &nbsp; '];
+  for (var i = 0; i < me.listaDeCategorias.length; i++) {
+    var categoria = me.listaDeCategorias[i];
+    var corta = categoria.corta;
+    var longa = categoria.longa;
+    me.tableDeCategorias[corta] = categoria;
+
+    if (categoria.gramatical === gramatical) {
+      html.push('&nbsp; <label id="e-cat' + corta + '"><input type="checkbox" id="cat' +
+                corta + '" onclick="Refresci()"> ' + longa + '</label>');
+    }
+  }
+  html.push('&nbsp; &nbsp; <input type="button" value="Zero" onclick="TotaCategorias(false, ' + sGramatical + ')">');
+  html.push('&nbsp; <input type="button" value="Tota" onclick="TotaCategorias(true, ' + sGramatical + ')">');
+  Elemento(nom).innerHTML = html.join('');
+}
+
+function TotaCategorias(state, gramatical) {
+  // Eleje o deseleje tota categorias gramatical o semantical.
+  for (var i = 0; i < me.listaDeCategorias.length; i++) {
+    var categoria = me.listaDeCategorias[i];
+    if (categoria.gramatical === gramatical) {
+      Elemento('cat' + categoria.corta).checked = state;
+    }
+  }
+  Refresci();
+}
+
+function XercaEnTota(state) {
+  Elemento('lfn').checked = state;
+  Elemento('def').checked = state;
+  for (var i = 0; i < me.listaDeLinguas.length; i++) {
+    Elemento(me.listaDeLinguas[i]).checked = state;
+  }
+  Refresci();
+}
+
+function MostraTota(state) {
+  for (var i = 0; i < me.listaDeLinguas.length; i++) {
+    Elemento('m' + me.lista2DeLinguas[i]).checked = state;
+  }
+  Refresci();
+}
+
+function DeselejeTota() {
+  for (var i = 0; i < me.listaDeElejes.length; i++) {
+    me.listaDeElejes[i].checked = false;
+  }
+}
+
+function ScermoEsTocable() {
+  return 'ontouchstart' in window || navigator.MaxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+}
+
+function Reinisia() {
+  DeselejeTota();
+
+  Elemento('pTot').checked = true;
+  Elemento('lfn').checked = true;
+  Elemento('iRad').checked = true;
+  Elemento('iDer').checked = true;
+  Elemento('mCat').checked = true;
+  Elemento('mDef').checked = true;
+  Elemento('cIma').checked = true;
+  Elemento('ima').checked = true;
+  for (var i = 0; i < me.listaDeLinguas.length; i++) {
+    Elemento('m' + me.lista2DeLinguas[i]).checked = true;
+  }
+  Elemento('mArt').checked = true;
+
+  Refresci();
+}
+
+function InisiaElejes() {
+  // Construi un lista de tota aparatetas capas de conserva de state en la URL.
+  me.listaDeElejes = [
+    Elemento('pCom'),
+    Elemento('pFin'),
+    Elemento('eInt'),
+    Elemento('eCom'),
+    Elemento('eFin'),
+    Elemento('pTot'),
+    Elemento('maj'),
+    Elemento('sin'),
+
+    Elemento('lfn'),
+    Elemento('def'),
+
+    Elemento('iRad'),
+    Elemento('iDer'),
+    Elemento('iBra'),
+    Elemento('fCat'),
+    Elemento('fCag'),
+
+    Elemento('mCat'),
+    Elemento('mDef'),
+    Elemento('mArt'),
+    Elemento('ima'),
+    Elemento('pri'),
+
+    Elemento('rex'),
+    Elemento('jsr'),
+    Elemento('sMaj')
+  ];
+
+  // Ajunta ance la aparatetas su "Xerca en" e "Mostra".
+  for (var i = 0; i < me.listaDeLinguas.length; i++) {
+    me.listaDeElejes.push(Elemento(me.listaDeLinguas[i]));
+    me.listaDeElejes.push(Elemento('m' + me.lista2DeLinguas[i]));
+  }
+
+  // Ajunta ance la aparatetas su "Filtri par categoria".
+  for (var i = 0; i < me.listaDeCategorias.length; i++) {
+    me.listaDeElejes.push(Elemento('cat' + me.listaDeCategorias[i].corta));
+  }
+
+  // Si la URL spesifa alga elejes, aplica estas aora.
+  var q = location.search;
+  if (q) {
+    DeselejeTota();
+
+    // Marca cada aparateta listada en la URL.
+    var e = q.slice(1).split('-');
+    for (var i = 0; i < e.length; i++) {
+      var eleje = Elemento(e[i]);
+      if (eleje) eleje.checked = true;
+    }
+
+    // Mostra cada area ascondable cual es listada en la URL.
+    if (q.indexOf('ele') !== -1) MostraElemento('elejes', 'bElejes');
+    if (q.indexOf('spe') !== -1) MostraElemento('spelador', 'bSpelador');
+    if (q.indexOf('aid') !== -1) MostraElemento('aida', 'bAida');
+  }
+
+  Refresci();
+}
+
+function Refresci() {
+  // La paje conteni un lia per conserva la state presente de la elejes.
+  // Ajusta la adirije de esta lia per refleta la state nova.
+  var lia = Elemento('lia');
+  var e = [];
+  for (var i = 0; i < me.listaDeElejes.length; i++) {
+    var eleje = me.listaDeElejes[i];
+    var eticeta = Elemento('e-' + eleje.id);
+    if (eleje.checked) {
+      e.push(eleje.id);
+      if (eticeta) eticeta.className = 'elejeda';
+    }
+    else {
+      if (eticeta) eticeta.className = '';
+    }
+  }
+  if (Elemento('elejes').vidable)   e.push('ele');
+  if (Elemento('spelador').vidable) e.push('spe');
+  if (Elemento('aida').vidable)     e.push('aid');
+  lia.search = '?' + e.join('-');
+
+  // Mostra o asconde alga partes tecnical de la formulario,
+  // seguente la state de la aparatetas cual controla los.
+  if (Elemento('jsr').checked) MostraElemento('jsRes');
+  else                         AscondeElemento('jsRes');
+  if (Elemento('fCag').checked) MostraElemento('categorias-g', '', 'inline');
+  else                          AscondeElemento('categorias-g');
+  if (Elemento('fCat').checked) MostraElemento('categorias-s', '', 'inline');
+  else                          AscondeElemento('categorias-s');
+}
+
+function InisiaTeclaPerElemento(nom) {
+  var elemento = Elemento(nom);
+  if (elemento.addEventListener) {
+    // Permete ce la usor presa la tecla Enter per esecuta un xerca, como si el ia clica
+    // la boton "Xerca". Formularios comun fa esta par se mesma, ma nos formulario asi
+    // es spesial: los no envia la usor a un paje nova; lo cambia simple la paje esistente.
+    // Si nos ta usa un elemento <form>, nos ta debe preveni ce la surfador envia la usor
+    // a un paje nova (cual ta es un copia fresca de la xercador, en fato).
+    elemento.addEventListener('keypress', function(e) {
+      if (e.keyCode == 13) Xerca();
+    });
+  }
+}
+
+function InisiaTeclas() {
+  InisiaTeclaPerElemento('terma');
+  InisiaTeclaPerElemento('jsRes');
+}
+
+function InisiaVidables() {
+  // La formulario es ascondeda asta cuando la banco de datos es intera cargada.
+  Elemento('cargante').style.display = 'none';
+  Elemento('form').style.display = 'block';
+
+  Elemento('elejesSimple').vidable = true;
+  Elemento('elejes').vidable = false;
+  Elemento('spelador').vidable = false;
+  Elemento('aida').vidable = false;
+}
+
+function Inisia() {
+  InisiaIE();
+  Reinisia();
+  InisiaCategorias();
+  InisiaVidables();
+  InisiaElejes();
+  InisiaTeclas();
+  Elemento('dataDeDatos').innerHTML = dataDeDatos;
+  Elemento('terma').focus();
+}
+
+Inisia();
+</script>
+</html>
